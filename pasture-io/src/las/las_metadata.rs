@@ -113,6 +113,13 @@ impl LASMetadata {
     pub fn raw_las_header(&self) -> Option<&Header> {
         self.raw_las_header.as_ref()
     }
+
+    /// Returns the variable-length records (VLRs) for the associated `LASMetadata`.
+    pub fn vlrs(&self) -> Option<&[Vlr]> {
+        self.raw_las_header
+            .as_ref()
+            .map(|header| header.vlrs().as_slice())
+    }
 }
 
 impl Display for LASMetadata {
